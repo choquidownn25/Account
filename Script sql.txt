@@ -1,0 +1,2468 @@
+
+
+SET QUOTED_IDENTIFIER OFF;
+GO
+USE [aspnet-coderush-090A0FD1-7DA3-4537-B736-EF0C0F063935];
+GO
+IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
+GO
+
+-- --------------------------------------------------
+-- Dropping existing FOREIGN KEY constraints
+-- --------------------------------------------------
+
+IF OBJECT_ID(N'[dbo].[FK_AspNetRoleClaims_AspNetRoles_RoleId]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AspNetRoleClaims] DROP CONSTRAINT [FK_AspNetRoleClaims_AspNetRoles_RoleId];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AspNetUserClaims_AspNetUsers_UserId]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AspNetUserClaims] DROP CONSTRAINT [FK_AspNetUserClaims_AspNetUsers_UserId];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AspNetUserLogins_AspNetUsers_UserId]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AspNetUserLogins] DROP CONSTRAINT [FK_AspNetUserLogins_AspNetUsers_UserId];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AspNetUserRoles_AspNetRoles_RoleId]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_AspNetUserRoles_AspNetRoles_RoleId];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AspNetUserRoles_AspNetUsers_UserId]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_AspNetUserRoles_AspNetUsers_UserId];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AspNetUserTokens_AspNetUsers_UserId]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AspNetUserTokens] DROP CONSTRAINT [FK_AspNetUserTokens_AspNetUsers_UserId];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Cita_DatosMedico]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Cita] DROP CONSTRAINT [FK_Cita_DatosMedico];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Cita_DatosPaciente]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Cita] DROP CONSTRAINT [FK_Cita_DatosPaciente];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ClaseTarifaria_Programa]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ClaseTarifaria] DROP CONSTRAINT [FK_ClaseTarifaria_Programa];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Consulta_Cita]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Consulta] DROP CONSTRAINT [FK_Consulta_Cita];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Consulta_DatosMedico]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Consulta] DROP CONSTRAINT [FK_Consulta_DatosMedico];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Consulta_DatosPaciente]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Consulta] DROP CONSTRAINT [FK_Consulta_DatosPaciente];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ConvenioPrograma]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Convenio] DROP CONSTRAINT [FK_ConvenioPrograma];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CreditoUsers]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Credito] DROP CONSTRAINT [FK_CreditoUsers];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Cuidad_Departamento]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Cuidad] DROP CONSTRAINT [FK_Cuidad_Departamento];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DatosMedico_Users]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DatosMedico] DROP CONSTRAINT [FK_DatosMedico_Users];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DatosPaciente_Users]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DatosPaciente] DROP CONSTRAINT [FK_DatosPaciente_Users];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Departamento_Pais]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Departamento] DROP CONSTRAINT [FK_Departamento_Pais];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EspecialidadMedica_DatosMedico]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EspecialidadMedica] DROP CONSTRAINT [FK_EspecialidadMedica_DatosMedico];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EspecialidadMedica_Especialidad]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EspecialidadMedica] DROP CONSTRAINT [FK_EspecialidadMedica_Especialidad];
+GO
+IF OBJECT_ID(N'[dbo].[FK_HistoriaClinica_Consulta]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HistoriaClinica] DROP CONSTRAINT [FK_HistoriaClinica_Consulta];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Horario_HorasHorario]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HorasHorario] DROP CONSTRAINT [FK_Horario_HorasHorario];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Horario_Users]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Horario] DROP CONSTRAINT [FK_Horario_Users];
+GO
+IF OBJECT_ID(N'[dbo].[FK_menugrupo_menu]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[MenuGrupo] DROP CONSTRAINT [FK_menugrupo_menu];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Operation_Operation_ParentNode]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Operation] DROP CONSTRAINT [FK_Operation_Operation_ParentNode];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Pago_Credito]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Pago] DROP CONSTRAINT [FK_Pago_Credito];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Pago_MedioPago]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Pago] DROP CONSTRAINT [FK_Pago_MedioPago];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PQRS_Users]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PQRS] DROP CONSTRAINT [FK_PQRS_Users];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PurchaseOrderLine_PurchaseOrder_PurchaseOrderId]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PurchaseOrderLine] DROP CONSTRAINT [FK_PurchaseOrderLine_PurchaseOrder_PurchaseOrderId];
+GO
+IF OBJECT_ID(N'[ModelStoreContainer].[FK_RefreshTokens_Users_UserId]', 'F') IS NOT NULL
+    ALTER TABLE [ModelStoreContainer].[RefreshTokens] DROP CONSTRAINT [FK_RefreshTokens_Users_UserId];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RoleClaims_Roles_RoleId]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RoleClaims] DROP CONSTRAINT [FK_RoleClaims_Roles_RoleId];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RoleOperations_Operation]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RoleOperations] DROP CONSTRAINT [FK_RoleOperations_Operation];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RoleOperations_Roles]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RoleOperations] DROP CONSTRAINT [FK_RoleOperations_Roles];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Roles_Client]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Roles] DROP CONSTRAINT [FK_Roles_Client];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SalesOrderLine_SalesOrder_SalesOrderId]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SalesOrderLine] DROP CONSTRAINT [FK_SalesOrderLine_SalesOrder_SalesOrderId];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Soporteo_Consulta]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Soporte] DROP CONSTRAINT [FK_Soporteo_Consulta];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Soporteo_TipoSoporte]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Soporte] DROP CONSTRAINT [FK_Soporteo_TipoSoporte];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TarifaProcedimientos_ClaseTarifaria]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TarifaProcedimientos] DROP CONSTRAINT [FK_TarifaProcedimientos_ClaseTarifaria];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserClaims_Users_UserId]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UserClaims] DROP CONSTRAINT [FK_UserClaims_Users_UserId];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserLogins_Users_UserId]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UserLogins] DROP CONSTRAINT [FK_UserLogins_Users_UserId];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserRefreshTokens_Users_UserId]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UserRefreshTokens] DROP CONSTRAINT [FK_UserRefreshTokens_Users_UserId];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserRoles_Roles]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UserRoles] DROP CONSTRAINT [FK_UserRoles_Roles];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserRoles_Users]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UserRoles] DROP CONSTRAINT [FK_UserRoles_Users];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Users_Cuidad]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Users] DROP CONSTRAINT [FK_Users_Cuidad];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Users_Programa]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Users] DROP CONSTRAINT [FK_Users_Programa];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserTokens_Users_UserId]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UserTokens] DROP CONSTRAINT [FK_UserTokens_Users_UserId];
+GO
+
+-- --------------------------------------------------
+-- Dropping existing tables
+-- --------------------------------------------------
+
+IF OBJECT_ID(N'[dbo].[__EFMigrationsHistory]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[__EFMigrationsHistory];
+GO
+IF OBJECT_ID(N'[dbo].[AspNetRoleClaims]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AspNetRoleClaims];
+GO
+IF OBJECT_ID(N'[dbo].[AspNetRoles]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AspNetRoles];
+GO
+IF OBJECT_ID(N'[dbo].[AspNetUserClaims]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AspNetUserClaims];
+GO
+IF OBJECT_ID(N'[dbo].[AspNetUserLogins]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AspNetUserLogins];
+GO
+IF OBJECT_ID(N'[dbo].[AspNetUserRoles]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AspNetUserRoles];
+GO
+IF OBJECT_ID(N'[dbo].[AspNetUsers]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AspNetUsers];
+GO
+IF OBJECT_ID(N'[dbo].[AspNetUserTokens]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AspNetUserTokens];
+GO
+IF OBJECT_ID(N'[dbo].[Bill]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Bill];
+GO
+IF OBJECT_ID(N'[dbo].[BillType]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[BillType];
+GO
+IF OBJECT_ID(N'[dbo].[Branch]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Branch];
+GO
+IF OBJECT_ID(N'[dbo].[C__EFMigrationsHistory]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[C__EFMigrationsHistory];
+GO
+IF OBJECT_ID(N'[dbo].[CashBank]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CashBank];
+GO
+IF OBJECT_ID(N'[dbo].[Chatbot]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Chatbot];
+GO
+IF OBJECT_ID(N'[dbo].[Cita]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Cita];
+GO
+IF OBJECT_ID(N'[dbo].[ClaseTarifaria]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ClaseTarifaria];
+GO
+IF OBJECT_ID(N'[dbo].[Client]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Client];
+GO
+IF OBJECT_ID(N'[dbo].[Consulta]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Consulta];
+GO
+IF OBJECT_ID(N'[dbo].[Convenio]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Convenio];
+GO
+IF OBJECT_ID(N'[dbo].[Credito]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Credito];
+GO
+IF OBJECT_ID(N'[dbo].[Cuidad]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Cuidad];
+GO
+IF OBJECT_ID(N'[dbo].[Currency]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Currency];
+GO
+IF OBJECT_ID(N'[dbo].[Customer]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Customer];
+GO
+IF OBJECT_ID(N'[dbo].[CustomerType]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CustomerType];
+GO
+IF OBJECT_ID(N'[dbo].[DatosMedico]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DatosMedico];
+GO
+IF OBJECT_ID(N'[dbo].[DatosPaciente]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DatosPaciente];
+GO
+IF OBJECT_ID(N'[dbo].[Departamento]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Departamento];
+GO
+IF OBJECT_ID(N'[dbo].[Especialidad]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Especialidad];
+GO
+IF OBJECT_ID(N'[dbo].[EspecialidadMedica]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[EspecialidadMedica];
+GO
+IF OBJECT_ID(N'[dbo].[Formulario]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Formulario];
+GO
+IF OBJECT_ID(N'[dbo].[GoodsReceivedNote]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GoodsReceivedNote];
+GO
+IF OBJECT_ID(N'[dbo].[HistoriaClinica]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[HistoriaClinica];
+GO
+IF OBJECT_ID(N'[dbo].[Horario]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Horario];
+GO
+IF OBJECT_ID(N'[dbo].[HorasHorario]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[HorasHorario];
+GO
+IF OBJECT_ID(N'[dbo].[Idioma]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Idioma];
+GO
+IF OBJECT_ID(N'[dbo].[Invoice]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Invoice];
+GO
+IF OBJECT_ID(N'[dbo].[InvoiceType]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[InvoiceType];
+GO
+IF OBJECT_ID(N'[dbo].[MedioPago]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[MedioPago];
+GO
+IF OBJECT_ID(N'[dbo].[Menu]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Menu];
+GO
+IF OBJECT_ID(N'[dbo].[MenuGrupo]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[MenuGrupo];
+GO
+IF OBJECT_ID(N'[dbo].[Moneda]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Moneda];
+GO
+IF OBJECT_ID(N'[dbo].[NumberSequence]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[NumberSequence];
+GO
+IF OBJECT_ID(N'[dbo].[Operation]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Operation];
+GO
+IF OBJECT_ID(N'[dbo].[Pago]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Pago];
+GO
+IF OBJECT_ID(N'[dbo].[Pais]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Pais];
+GO
+IF OBJECT_ID(N'[dbo].[PaymentReceive]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PaymentReceive];
+GO
+IF OBJECT_ID(N'[dbo].[PaymentType]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PaymentType];
+GO
+IF OBJECT_ID(N'[dbo].[PaymentVoucher]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PaymentVoucher];
+GO
+IF OBJECT_ID(N'[dbo].[PoliticaResponsabilidad]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PoliticaResponsabilidad];
+GO
+IF OBJECT_ID(N'[dbo].[PQRS]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PQRS];
+GO
+IF OBJECT_ID(N'[dbo].[Procedimiento]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Procedimiento];
+GO
+IF OBJECT_ID(N'[dbo].[Product]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Product];
+GO
+IF OBJECT_ID(N'[dbo].[ProductType]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ProductType];
+GO
+IF OBJECT_ID(N'[dbo].[Programa]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Programa];
+GO
+IF OBJECT_ID(N'[dbo].[PurchaseOrder]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PurchaseOrder];
+GO
+IF OBJECT_ID(N'[dbo].[PurchaseOrderLine]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PurchaseOrderLine];
+GO
+IF OBJECT_ID(N'[dbo].[PurchaseType]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PurchaseType];
+GO
+IF OBJECT_ID(N'[dbo].[RoleClaims]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[RoleClaims];
+GO
+IF OBJECT_ID(N'[dbo].[RoleOperations]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[RoleOperations];
+GO
+IF OBJECT_ID(N'[dbo].[Roles]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Roles];
+GO
+IF OBJECT_ID(N'[dbo].[SalesOrder]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SalesOrder];
+GO
+IF OBJECT_ID(N'[dbo].[SalesOrderLine]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SalesOrderLine];
+GO
+IF OBJECT_ID(N'[dbo].[SalesType]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SalesType];
+GO
+IF OBJECT_ID(N'[dbo].[Shipment]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Shipment];
+GO
+IF OBJECT_ID(N'[dbo].[ShipmentType]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ShipmentType];
+GO
+IF OBJECT_ID(N'[dbo].[Soporte]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Soporte];
+GO
+IF OBJECT_ID(N'[dbo].[sysdiagrams]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[sysdiagrams];
+GO
+IF OBJECT_ID(N'[dbo].[TarifaProcedimiento]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TarifaProcedimiento];
+GO
+IF OBJECT_ID(N'[dbo].[TarifaProcedimientos]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TarifaProcedimientos];
+GO
+IF OBJECT_ID(N'[dbo].[TipoSoporte]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TipoSoporte];
+GO
+IF OBJECT_ID(N'[dbo].[TipSalud]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TipSalud];
+GO
+IF OBJECT_ID(N'[dbo].[UnitOfMeasure]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UnitOfMeasure];
+GO
+IF OBJECT_ID(N'[dbo].[UserClaims]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UserClaims];
+GO
+IF OBJECT_ID(N'[dbo].[UserLogins]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UserLogins];
+GO
+IF OBJECT_ID(N'[dbo].[UserProfile]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UserProfile];
+GO
+IF OBJECT_ID(N'[dbo].[UserRefreshTokens]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UserRefreshTokens];
+GO
+IF OBJECT_ID(N'[dbo].[UserRoles]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UserRoles];
+GO
+IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Users];
+GO
+IF OBJECT_ID(N'[dbo].[UserTokens]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UserTokens];
+GO
+IF OBJECT_ID(N'[dbo].[Vendor]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Vendor];
+GO
+IF OBJECT_ID(N'[dbo].[VendorType]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[VendorType];
+GO
+IF OBJECT_ID(N'[dbo].[Warehouse]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Warehouse];
+GO
+IF OBJECT_ID(N'[ModelStoreContainer].[RefreshTokens]', 'U') IS NOT NULL
+    DROP TABLE [ModelStoreContainer].[RefreshTokens];
+GO
+IF OBJECT_ID(N'[ModelStoreContainer].[UserRefreshToken]', 'U') IS NOT NULL
+    DROP TABLE [ModelStoreContainer].[UserRefreshToken];
+GO
+
+-- --------------------------------------------------
+-- Creating all tables
+-- --------------------------------------------------
+
+-- Creating table 'C__EFMigrationsHistory'
+CREATE TABLE [dbo].[C__EFMigrationsHistory] (
+    [MigrationId] nvarchar(150)  NOT NULL,
+    [ProductVersion] nvarchar(32)  NOT NULL
+);
+GO
+
+-- Creating table 'AspNetRoleClaims'
+CREATE TABLE [dbo].[AspNetRoleClaims] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [ClaimType] nvarchar(max)  NULL,
+    [ClaimValue] nvarchar(max)  NULL,
+    [RoleId] nvarchar(450)  NOT NULL
+);
+GO
+
+-- Creating table 'AspNetRoles'
+CREATE TABLE [dbo].[AspNetRoles] (
+    [Id] nvarchar(450)  NOT NULL,
+    [ConcurrencyStamp] nvarchar(max)  NULL,
+    [Name] nvarchar(256)  NULL,
+    [NormalizedName] nvarchar(256)  NULL
+);
+GO
+
+-- Creating table 'AspNetUserClaims'
+CREATE TABLE [dbo].[AspNetUserClaims] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [ClaimType] nvarchar(max)  NULL,
+    [ClaimValue] nvarchar(max)  NULL,
+    [UserId] nvarchar(450)  NOT NULL
+);
+GO
+
+-- Creating table 'AspNetUserLogins'
+CREATE TABLE [dbo].[AspNetUserLogins] (
+    [LoginProvider] nvarchar(450)  NOT NULL,
+    [ProviderKey] nvarchar(450)  NOT NULL,
+    [ProviderDisplayName] nvarchar(max)  NULL,
+    [UserId] nvarchar(450)  NOT NULL
+);
+GO
+
+-- Creating table 'AspNetUsers'
+CREATE TABLE [dbo].[AspNetUsers] (
+    [Id] nvarchar(450)  NOT NULL,
+    [AccessFailedCount] int  NOT NULL,
+    [ConcurrencyStamp] nvarchar(max)  NULL,
+    [Email] nvarchar(256)  NULL,
+    [EmailConfirmed] bit  NOT NULL,
+    [LockoutEnabled] bit  NOT NULL,
+    [LockoutEnd] datetimeoffset  NULL,
+    [NormalizedEmail] nvarchar(256)  NULL,
+    [NormalizedUserName] nvarchar(256)  NULL,
+    [PasswordHash] nvarchar(max)  NULL,
+    [PhoneNumber] nvarchar(max)  NULL,
+    [PhoneNumberConfirmed] bit  NOT NULL,
+    [SecurityStamp] nvarchar(max)  NULL,
+    [TwoFactorEnabled] bit  NOT NULL,
+    [UserName] nvarchar(256)  NULL
+);
+GO
+
+-- Creating table 'AspNetUserTokens'
+CREATE TABLE [dbo].[AspNetUserTokens] (
+    [UserId] nvarchar(450)  NOT NULL,
+    [LoginProvider] nvarchar(450)  NOT NULL,
+    [Name] nvarchar(450)  NOT NULL,
+    [Value] nvarchar(max)  NULL
+);
+GO
+
+-- Creating table 'Bill'
+CREATE TABLE [dbo].[Bill] (
+    [BillId] int IDENTITY(1,1) NOT NULL,
+    [BillDate] datetimeoffset  NOT NULL,
+    [BillDueDate] datetimeoffset  NOT NULL,
+    [BillName] nvarchar(max)  NULL,
+    [BillTypeId] int  NOT NULL,
+    [GoodsReceivedNoteId] int  NOT NULL,
+    [VendorDONumber] nvarchar(max)  NULL,
+    [VendorInvoiceNumber] nvarchar(max)  NULL
+);
+GO
+
+-- Creating table 'BillType'
+CREATE TABLE [dbo].[BillType] (
+    [BillTypeId] int IDENTITY(1,1) NOT NULL,
+    [BillTypeName] nvarchar(max)  NOT NULL,
+    [Description] nvarchar(max)  NULL
+);
+GO
+
+-- Creating table 'Branch'
+CREATE TABLE [dbo].[Branch] (
+    [BranchId] int IDENTITY(1,1) NOT NULL,
+    [Address] nvarchar(max)  NULL,
+    [BranchName] nvarchar(max)  NOT NULL,
+    [City] nvarchar(max)  NULL,
+    [ContactPerson] nvarchar(max)  NULL,
+    [CurrencyId] int  NOT NULL,
+    [Description] nvarchar(max)  NULL,
+    [Email] nvarchar(max)  NULL,
+    [Phone] nvarchar(max)  NULL,
+    [State] nvarchar(max)  NULL,
+    [ZipCode] nvarchar(max)  NULL
+);
+GO
+
+-- Creating table 'C__EFMigrationsHistory1'
+CREATE TABLE [dbo].[C__EFMigrationsHistory1] (
+    [MigrationId] nvarchar(150)  NOT NULL,
+    [ProductVersion] nvarchar(32)  NOT NULL
+);
+GO
+
+-- Creating table 'CashBank'
+CREATE TABLE [dbo].[CashBank] (
+    [CashBankId] int IDENTITY(1,1) NOT NULL,
+    [CashBankName] nvarchar(max)  NULL,
+    [Description] nvarchar(max)  NULL
+);
+GO
+
+-- Creating table 'Chatbot'
+CREATE TABLE [dbo].[Chatbot] (
+    [IdChatBot] bigint IDENTITY(1,1) NOT NULL,
+    [Activo] bit  NOT NULL,
+    [Pregunta] varchar(max)  NULL,
+    [Respuesta] varchar(max)  NULL,
+    [OpcionSistema] varchar(100)  NULL
+);
+GO
+
+-- Creating table 'Cita'
+CREATE TABLE [dbo].[Cita] (
+    [IdCita] bigint IDENTITY(1,1) NOT NULL,
+    [Fecha] datetime  NOT NULL,
+    [Hora] time  NOT NULL,
+    [IdPaciente] bigint  NOT NULL,
+    [IdMedico] bigint  NOT NULL
+);
+GO
+
+-- Creating table 'ClaseTarifaria'
+CREATE TABLE [dbo].[ClaseTarifaria] (
+    [IdClaseTarifaria] int IDENTITY(1,1) NOT NULL,
+    [UsuarioCrea] varchar(50)  NOT NULL,
+    [FechaCrea] datetime  NOT NULL,
+    [Estado] bit  NOT NULL,
+    [NombreClase] varchar(50)  NOT NULL,
+    [IdPrograma] int  NULL
+);
+GO
+
+-- Creating table 'Client'
+CREATE TABLE [dbo].[Client] (
+    [ClientId] uniqueidentifier  NOT NULL,
+    [Code] varchar(5)  NOT NULL,
+    [IdentificationType] smallint  NOT NULL,
+    [IdentificationNumber] varchar(50)  NOT NULL,
+    [Name] varchar(150)  NOT NULL,
+    [Logo] varchar(max)  NULL,
+    [IsOwner] bit  NOT NULL,
+    [IsActive] bit  NOT NULL
+);
+GO
+
+-- Creating table 'Consulta'
+CREATE TABLE [dbo].[Consulta] (
+    [IdConsulta] bigint IDENTITY(1,1) NOT NULL,
+    [IdMedico] bigint  NOT NULL,
+    [IdPaciente] bigint  NOT NULL,
+    [IdCita] bigint  NULL,
+    [FehaCita] datetime  NOT NULL,
+    [HoraInicio] time  NOT NULL,
+    [HoraFin] time  NULL,
+    [Calificacion] varchar(50)  NULL,
+    [Comentarios] varchar(max)  NULL
+);
+GO
+
+-- Creating table 'Convenio'
+CREATE TABLE [dbo].[Convenio] (
+    [Convenio1] int IDENTITY(1,1) NOT NULL,
+    [IdPrograma] int  NOT NULL,
+    [Nombre] varchar(50)  NOT NULL,
+    [Estado] bit  NOT NULL,
+    [Co] varchar(50)  NULL
+);
+GO
+
+-- Creating table 'Credito'
+CREATE TABLE [dbo].[Credito] (
+    [IdCredito] bigint IDENTITY(1,1) NOT NULL,
+    [Saldo] decimal(18,2)  NOT NULL,
+    [AFavor] bit  NOT NULL,
+    [IdUsuario] nvarchar(450)  NOT NULL
+);
+GO
+
+-- Creating table 'Cuidad'
+CREATE TABLE [dbo].[Cuidad] (
+    [IdCiudad] smallint IDENTITY(1,1) NOT NULL,
+    [Nombre] varchar(100)  NOT NULL,
+    [CodCiu] varchar(50)  NOT NULL,
+    [IdDepartamento] int  NOT NULL
+);
+GO
+
+-- Creating table 'Currency'
+CREATE TABLE [dbo].[Currency] (
+    [CurrencyId] int IDENTITY(1,1) NOT NULL,
+    [CurrencyCode] nvarchar(max)  NOT NULL,
+    [CurrencyName] nvarchar(max)  NOT NULL,
+    [Description] nvarchar(max)  NULL
+);
+GO
+
+-- Creating table 'Customer'
+CREATE TABLE [dbo].[Customer] (
+    [CustomerId] int IDENTITY(1,1) NOT NULL,
+    [Address] nvarchar(max)  NULL,
+    [City] nvarchar(max)  NULL,
+    [ContactPerson] nvarchar(max)  NULL,
+    [CustomerName] nvarchar(max)  NOT NULL,
+    [CustomerTypeId] int  NOT NULL,
+    [Email] nvarchar(max)  NULL,
+    [Phone] nvarchar(max)  NULL,
+    [State] nvarchar(max)  NULL,
+    [ZipCode] nvarchar(max)  NULL
+);
+GO
+
+-- Creating table 'CustomerType'
+CREATE TABLE [dbo].[CustomerType] (
+    [CustomerTypeId] int IDENTITY(1,1) NOT NULL,
+    [CustomerTypeName] nvarchar(max)  NOT NULL,
+    [Description] nvarchar(max)  NULL
+);
+GO
+
+-- Creating table 'DatosMedico'
+CREATE TABLE [dbo].[DatosMedico] (
+    [IdMedico] bigint IDENTITY(1,1) NOT NULL,
+    [IdUsuario] nvarchar(450)  NOT NULL,
+    [TarjetaProfesional] varchar(50)  NULL,
+    [PolizaResponsabilidad] varchar(50)  NULL,
+    [IdEspecialidad] int  NOT NULL
+);
+GO
+
+-- Creating table 'DatosPaciente'
+CREATE TABLE [dbo].[DatosPaciente] (
+    [IdPaciente] bigint IDENTITY(1,1) NOT NULL,
+    [NitPaciente] varchar(50)  NOT NULL,
+    [IdUsuario] nvarchar(450)  NOT NULL,
+    [FechaNacimiento] datetime  NOT NULL
+);
+GO
+
+-- Creating table 'Departamento'
+CREATE TABLE [dbo].[Departamento] (
+    [IdDepartamento] int IDENTITY(1,1) NOT NULL,
+    [Nombre] varchar(100)  NOT NULL,
+    [CodDep] varchar(50)  NOT NULL,
+    [CodTel] varchar(50)  NOT NULL,
+    [IdPais] int  NOT NULL
+);
+GO
+
+-- Creating table 'Especialidad'
+CREATE TABLE [dbo].[Especialidad] (
+    [IdEspecialidad] smallint IDENTITY(1,1) NOT NULL,
+    [Nombre] varchar(50)  NOT NULL,
+    [Estado] bit  NOT NULL,
+    [CodEspecialidad] varchar(50)  NOT NULL
+);
+GO
+
+-- Creating table 'Formulario'
+CREATE TABLE [dbo].[Formulario] (
+    [IdFormulario] smallint  NOT NULL,
+    [Detalle] varchar(100)  NOT NULL,
+    [Codigo] varchar(100)  NOT NULL,
+    [Activo] bit  NOT NULL
+);
+GO
+
+-- Creating table 'GoodsReceivedNote'
+CREATE TABLE [dbo].[GoodsReceivedNote] (
+    [GoodsReceivedNoteId] int IDENTITY(1,1) NOT NULL,
+    [GRNDate] datetimeoffset  NOT NULL,
+    [GoodsReceivedNoteName] nvarchar(max)  NULL,
+    [IsFullReceive] bit  NOT NULL,
+    [PurchaseOrderId] int  NOT NULL,
+    [VendorDONumber] nvarchar(max)  NULL,
+    [VendorInvoiceNumber] nvarchar(max)  NULL,
+    [WarehouseId] int  NOT NULL
+);
+GO
+
+-- Creating table 'HistoriaClinica'
+CREATE TABLE [dbo].[HistoriaClinica] (
+    [IdHistoriaClinica] bigint IDENTITY(1,1) NOT NULL,
+    [IdConsulta] bigint  NOT NULL,
+    [Nota] varchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'Horario'
+CREATE TABLE [dbo].[Horario] (
+    [IdHorario] bigint IDENTITY(1,1) NOT NULL,
+    [Fecha] datetime  NOT NULL,
+    [IdUsuario] nvarchar(450)  NOT NULL
+);
+GO
+
+-- Creating table 'HorasHorario'
+CREATE TABLE [dbo].[HorasHorario] (
+    [IdHorasHorario] bigint IDENTITY(1,1) NOT NULL,
+    [horaInicio] time  NOT NULL,
+    [horaFin] time  NOT NULL,
+    [IdHorario] bigint  NOT NULL
+);
+GO
+
+-- Creating table 'Idioma'
+CREATE TABLE [dbo].[Idioma] (
+    [IdIdioma] smallint IDENTITY(1,1) NOT NULL,
+    [Descripcion] varchar(50)  NOT NULL,
+    [Activo] bit  NOT NULL
+);
+GO
+
+-- Creating table 'Invoice'
+CREATE TABLE [dbo].[Invoice] (
+    [InvoiceId] int IDENTITY(1,1) NOT NULL,
+    [InvoiceDate] datetimeoffset  NOT NULL,
+    [InvoiceDueDate] datetimeoffset  NOT NULL,
+    [InvoiceName] nvarchar(max)  NULL,
+    [InvoiceTypeId] int  NOT NULL,
+    [ShipmentId] int  NOT NULL
+);
+GO
+
+-- Creating table 'InvoiceType'
+CREATE TABLE [dbo].[InvoiceType] (
+    [InvoiceTypeId] int IDENTITY(1,1) NOT NULL,
+    [Description] nvarchar(max)  NULL,
+    [InvoiceTypeName] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'MedioPago'
+CREATE TABLE [dbo].[MedioPago] (
+    [IdMedioPago] smallint IDENTITY(1,1) NOT NULL,
+    [Descripcion] varchar(100)  NOT NULL,
+    [Activo] bit  NOT NULL
+);
+GO
+
+-- Creating table 'Menu'
+CREATE TABLE [dbo].[Menu] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Codigo] int  NOT NULL,
+    [Nombre] nvarchar(50)  NOT NULL,
+    [Descripcion] nvarchar(100)  NULL,
+    [Activo] bigint  NOT NULL
+);
+GO
+
+-- Creating table 'MenuGrupo'
+CREATE TABLE [dbo].[MenuGrupo] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [idRol] int  NOT NULL,
+    [idMenu] int  NOT NULL
+);
+GO
+
+-- Creating table 'Moneda'
+CREATE TABLE [dbo].[Moneda] (
+    [IdMoneda] int IDENTITY(1,1) NOT NULL,
+    [CodigoISO] varchar(10)  NULL,
+    [Nombre] varchar(100)  NULL,
+    [Activo] bit  NOT NULL,
+    [IdPais] int  NULL
+);
+GO
+
+-- Creating table 'NumberSequence'
+CREATE TABLE [dbo].[NumberSequence] (
+    [NumberSequenceId] int IDENTITY(1,1) NOT NULL,
+    [LastNumber] int  NOT NULL,
+    [Module] nvarchar(max)  NOT NULL,
+    [NumberSequenceName] nvarchar(max)  NOT NULL,
+    [Prefix] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'Operation'
+CREATE TABLE [dbo].[Operation] (
+    [OperationId] int IDENTITY(1,1) NOT NULL,
+    [Name] varchar(100)  NOT NULL,
+    [Description] varchar(200)  NULL,
+    [ControllerName] varchar(50)  NOT NULL,
+    [ActionName] varchar(50)  NOT NULL,
+    [ParentNode] int  NULL,
+    [GroupName] nvarchar(50)  NULL
+);
+GO
+
+-- Creating table 'Pago'
+CREATE TABLE [dbo].[Pago] (
+    [IdPago] bigint IDENTITY(1,1) NOT NULL,
+    [Fecha] varchar(50)  NOT NULL,
+    [Valor] decimal(18,2)  NOT NULL,
+    [IdMedioPago] smallint  NOT NULL,
+    [IdCredito] bigint  NOT NULL
+);
+GO
+
+-- Creating table 'Pais'
+CREATE TABLE [dbo].[Pais] (
+    [IdPais] int IDENTITY(1,1) NOT NULL,
+    [Nombre] varchar(100)  NOT NULL,
+    [CodPais] varchar(50)  NOT NULL,
+    [CodTelefonico] varchar(50)  NULL,
+    [Sigla] char(2)  NOT NULL,
+    [Activo] bit  NOT NULL,
+    [IdMoneda] int  NOT NULL
+);
+GO
+
+-- Creating table 'PaymentReceive'
+CREATE TABLE [dbo].[PaymentReceive] (
+    [PaymentReceiveId] int IDENTITY(1,1) NOT NULL,
+    [InvoiceId] int  NOT NULL,
+    [IsFullPayment] bit  NOT NULL,
+    [PaymentAmount] float  NOT NULL,
+    [PaymentDate] datetimeoffset  NOT NULL,
+    [PaymentReceiveName] nvarchar(max)  NULL,
+    [PaymentTypeId] int  NOT NULL
+);
+GO
+
+-- Creating table 'PaymentType'
+CREATE TABLE [dbo].[PaymentType] (
+    [PaymentTypeId] int IDENTITY(1,1) NOT NULL,
+    [Description] nvarchar(max)  NULL,
+    [PaymentTypeName] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'PaymentVoucher'
+CREATE TABLE [dbo].[PaymentVoucher] (
+    [PaymentvoucherId] int IDENTITY(1,1) NOT NULL,
+    [BillId] int  NOT NULL,
+    [CashBankId] int  NOT NULL,
+    [IsFullPayment] bit  NOT NULL,
+    [PaymentAmount] float  NOT NULL,
+    [PaymentDate] datetimeoffset  NOT NULL,
+    [PaymentTypeId] int  NOT NULL,
+    [PaymentVoucherName] nvarchar(max)  NULL
+);
+GO
+
+-- Creating table 'PoliticaResponsabilidad'
+CREATE TABLE [dbo].[PoliticaResponsabilidad] (
+    [IdPoliticaResponsibilidad] int  NOT NULL,
+    [cuerpo] varchar(8000)  NULL
+);
+GO
+
+-- Creating table 'PQRS'
+CREATE TABLE [dbo].[PQRS] (
+    [IdPQRS] bigint  NOT NULL,
+    [Detalle] varchar(max)  NOT NULL,
+    [FechaRadicacion] datetime  NOT NULL,
+    [Tramitado] bit  NULL,
+    [IdUsuario] nvarchar(450)  NOT NULL
+);
+GO
+
+-- Creating table 'Procedimiento'
+CREATE TABLE [dbo].[Procedimiento] (
+    [IdProcedimiento] int IDENTITY(1,1) NOT NULL,
+    [Nombre] varchar(50)  NOT NULL,
+    [CodProcedimiento] varchar(50)  NOT NULL,
+    [Estado] bit  NOT NULL
+);
+GO
+
+-- Creating table 'Product'
+CREATE TABLE [dbo].[Product] (
+    [ProductId] int IDENTITY(1,1) NOT NULL,
+    [Barcode] nvarchar(max)  NULL,
+    [BranchId] int  NOT NULL,
+    [CurrencyId] int  NOT NULL,
+    [DefaultBuyingPrice] float  NOT NULL,
+    [DefaultSellingPrice] float  NOT NULL,
+    [Description] nvarchar(max)  NULL,
+    [ProductCode] nvarchar(max)  NULL,
+    [ProductImageUrl] nvarchar(max)  NULL,
+    [ProductName] nvarchar(max)  NOT NULL,
+    [UnitOfMeasureId] int  NOT NULL
+);
+GO
+
+-- Creating table 'ProductType'
+CREATE TABLE [dbo].[ProductType] (
+    [ProductTypeId] int IDENTITY(1,1) NOT NULL,
+    [Description] nvarchar(max)  NULL,
+    [ProductTypeName] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'Programa'
+CREATE TABLE [dbo].[Programa] (
+    [IdPrograma] int IDENTITY(1,1) NOT NULL,
+    [CodPrograma] varchar(50)  NOT NULL,
+    [Nombre] varchar(150)  NOT NULL,
+    [FechaCrea] datetime  NOT NULL,
+    [UsuarioCrea] varchar(50)  NOT NULL
+);
+GO
+
+-- Creating table 'PurchaseOrder'
+CREATE TABLE [dbo].[PurchaseOrder] (
+    [PurchaseOrderId] int IDENTITY(1,1) NOT NULL,
+    [Amount] float  NOT NULL,
+    [BranchId] int  NOT NULL,
+    [CurrencyId] int  NOT NULL,
+    [DeliveryDate] datetimeoffset  NOT NULL,
+    [Discount] float  NOT NULL,
+    [Freight] float  NOT NULL,
+    [OrderDate] datetimeoffset  NOT NULL,
+    [PurchaseOrderName] nvarchar(max)  NULL,
+    [PurchaseTypeId] int  NOT NULL,
+    [Remarks] nvarchar(max)  NULL,
+    [SubTotal] float  NOT NULL,
+    [Tax] float  NOT NULL,
+    [Total] float  NOT NULL,
+    [VendorId] int  NOT NULL
+);
+GO
+
+-- Creating table 'PurchaseOrderLine'
+CREATE TABLE [dbo].[PurchaseOrderLine] (
+    [PurchaseOrderLineId] int IDENTITY(1,1) NOT NULL,
+    [Amount] float  NOT NULL,
+    [Description] nvarchar(max)  NULL,
+    [DiscountAmount] float  NOT NULL,
+    [DiscountPercentage] float  NOT NULL,
+    [Price] float  NOT NULL,
+    [ProductId] int  NOT NULL,
+    [PurchaseOrderId] int  NOT NULL,
+    [Quantity] float  NOT NULL,
+    [SubTotal] float  NOT NULL,
+    [TaxAmount] float  NOT NULL,
+    [TaxPercentage] float  NOT NULL,
+    [Total] float  NOT NULL
+);
+GO
+
+-- Creating table 'PurchaseType'
+CREATE TABLE [dbo].[PurchaseType] (
+    [PurchaseTypeId] int IDENTITY(1,1) NOT NULL,
+    [Description] nvarchar(max)  NULL,
+    [PurchaseTypeName] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'RoleClaims'
+CREATE TABLE [dbo].[RoleClaims] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [ClaimType] nvarchar(max)  NULL,
+    [ClaimValue] nvarchar(max)  NULL,
+    [RoleId] nvarchar(450)  NOT NULL
+);
+GO
+
+-- Creating table 'Roles'
+CREATE TABLE [dbo].[Roles] (
+    [Id] nvarchar(450)  NOT NULL,
+    [ConcurrencyStamp] nvarchar(max)  NULL,
+    [Name] nvarchar(256)  NULL,
+    [NormalizedName] nvarchar(256)  NULL,
+    [ClientId] uniqueidentifier  NULL
+);
+GO
+
+-- Creating table 'SalesOrder'
+CREATE TABLE [dbo].[SalesOrder] (
+    [SalesOrderId] int IDENTITY(1,1) NOT NULL,
+    [Amount] float  NOT NULL,
+    [BranchId] int  NOT NULL,
+    [CurrencyId] int  NOT NULL,
+    [CustomerId] int  NOT NULL,
+    [CustomerRefNumber] nvarchar(max)  NULL,
+    [DeliveryDate] datetimeoffset  NOT NULL,
+    [Discount] float  NOT NULL,
+    [Freight] float  NOT NULL,
+    [OrderDate] datetimeoffset  NOT NULL,
+    [Remarks] nvarchar(max)  NULL,
+    [SalesOrderName] nvarchar(max)  NULL,
+    [SalesTypeId] int  NOT NULL,
+    [SubTotal] float  NOT NULL,
+    [Tax] float  NOT NULL,
+    [Total] float  NOT NULL
+);
+GO
+
+-- Creating table 'SalesOrderLine'
+CREATE TABLE [dbo].[SalesOrderLine] (
+    [SalesOrderLineId] int IDENTITY(1,1) NOT NULL,
+    [Amount] float  NOT NULL,
+    [Description] nvarchar(max)  NULL,
+    [DiscountAmount] float  NOT NULL,
+    [DiscountPercentage] float  NOT NULL,
+    [Price] float  NOT NULL,
+    [ProductId] int  NOT NULL,
+    [Quantity] float  NOT NULL,
+    [SalesOrderId] int  NOT NULL,
+    [SubTotal] float  NOT NULL,
+    [TaxAmount] float  NOT NULL,
+    [TaxPercentage] float  NOT NULL,
+    [Total] float  NOT NULL
+);
+GO
+
+-- Creating table 'SalesType'
+CREATE TABLE [dbo].[SalesType] (
+    [SalesTypeId] int IDENTITY(1,1) NOT NULL,
+    [Description] nvarchar(max)  NULL,
+    [SalesTypeName] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'Shipment'
+CREATE TABLE [dbo].[Shipment] (
+    [ShipmentId] int IDENTITY(1,1) NOT NULL,
+    [IsFullShipment] bit  NOT NULL,
+    [SalesOrderId] int  NOT NULL,
+    [ShipmentDate] datetimeoffset  NOT NULL,
+    [ShipmentName] nvarchar(max)  NULL,
+    [ShipmentTypeId] int  NOT NULL,
+    [WarehouseId] int  NOT NULL
+);
+GO
+
+-- Creating table 'ShipmentType'
+CREATE TABLE [dbo].[ShipmentType] (
+    [ShipmentTypeId] int IDENTITY(1,1) NOT NULL,
+    [Description] nvarchar(max)  NULL,
+    [ShipmentTypeName] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'Soporte'
+CREATE TABLE [dbo].[Soporte] (
+    [IdSoporte] bigint  NOT NULL,
+    [IdConsulta] bigint  NOT NULL,
+    [IdTipoSoporte] smallint  NOT NULL,
+    [Nombre] varchar(100)  NOT NULL,
+    [Tamanio] smallint  NOT NULL,
+    [TipoArchivo] varchar(50)  NOT NULL,
+    [Ruta] varchar(100)  NULL
+);
+GO
+
+-- Creating table 'sysdiagrams'
+CREATE TABLE [dbo].[sysdiagrams] (
+    [name] nvarchar(128)  NOT NULL,
+    [principal_id] int  NOT NULL,
+    [diagram_id] int IDENTITY(1,1) NOT NULL,
+    [version] int  NULL,
+    [definition] varbinary(max)  NULL
+);
+GO
+
+-- Creating table 'TarifaProcedimiento'
+CREATE TABLE [dbo].[TarifaProcedimiento] (
+    [IdTarifa] smallint  NOT NULL,
+    [Valor] bigint  NOT NULL,
+    [CodProcedimiento] varchar(50)  NOT NULL
+);
+GO
+
+-- Creating table 'TarifaProcedimientos'
+CREATE TABLE [dbo].[TarifaProcedimientos] (
+    [IdClaseTarifa] int  NOT NULL,
+    [IdProcedimiento] int  NOT NULL,
+    [Tarifa] int  NOT NULL,
+    [FechaCrea] datetime  NOT NULL,
+    [FechaInicio] datetime  NOT NULL,
+    [IdTarifaProcedimientos] int IDENTITY(1,1) NOT NULL,
+    [IdClaseTarifaria] int  NULL
+);
+GO
+
+-- Creating table 'TipoSoporte'
+CREATE TABLE [dbo].[TipoSoporte] (
+    [IdTipoSoporte] smallint IDENTITY(1,1) NOT NULL,
+    [Descripcion] nvarchar(100)  NOT NULL,
+    [Activo] bit  NOT NULL
+);
+GO
+
+-- Creating table 'TipSalud'
+CREATE TABLE [dbo].[TipSalud] (
+    [IdTipSalud] smallint  NOT NULL,
+    [Detalle] nvarchar(max)  NOT NULL,
+    [FechaIngreso] datetime  NOT NULL,
+    [FechaDeBaja] datetime  NULL
+);
+GO
+
+-- Creating table 'UnitOfMeasure'
+CREATE TABLE [dbo].[UnitOfMeasure] (
+    [UnitOfMeasureId] int IDENTITY(1,1) NOT NULL,
+    [Description] nvarchar(max)  NULL,
+    [UnitOfMeasureName] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'UserClaims'
+CREATE TABLE [dbo].[UserClaims] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [ClaimType] nvarchar(max)  NULL,
+    [ClaimValue] nvarchar(max)  NULL,
+    [UserId] nvarchar(450)  NOT NULL
+);
+GO
+
+-- Creating table 'UserLogins'
+CREATE TABLE [dbo].[UserLogins] (
+    [LoginProvider] nvarchar(450)  NOT NULL,
+    [ProviderKey] nvarchar(450)  NOT NULL,
+    [ProviderDisplayName] nvarchar(max)  NULL,
+    [UserId] nvarchar(450)  NOT NULL
+);
+GO
+
+-- Creating table 'UserProfile'
+CREATE TABLE [dbo].[UserProfile] (
+    [UserProfileId] int IDENTITY(1,1) NOT NULL,
+    [ApplicationUserId] nvarchar(max)  NULL,
+    [ConfirmPassword] nvarchar(max)  NULL,
+    [Email] nvarchar(max)  NULL,
+    [FirstName] nvarchar(max)  NULL,
+    [LastName] nvarchar(max)  NULL,
+    [OldPassword] nvarchar(max)  NULL,
+    [Password] nvarchar(max)  NULL,
+    [ProfilePicture] nvarchar(max)  NULL,
+    [IdRol] smallint  NULL
+);
+GO
+
+-- Creating table 'UserRefreshTokens'
+CREATE TABLE [dbo].[UserRefreshTokens] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [UserName] nvarchar(256)  NULL,
+    [PasswordHash] nvarchar(max)  NULL,
+    [RefreshToken] nvarchar(max)  NULL,
+    [UserId] nvarchar(450)  NOT NULL
+);
+GO
+
+-- Creating table 'Users'
+CREATE TABLE [dbo].[Users] (
+    [Id] nvarchar(450)  NOT NULL,
+    [AccessFailedCount] int  NOT NULL,
+    [ConcurrencyStamp] nvarchar(max)  NULL,
+    [Email] nvarchar(256)  NULL,
+    [EmailConfirmed] bit  NOT NULL,
+    [LockoutEnabled] bit  NOT NULL,
+    [LockoutEnd] datetimeoffset  NULL,
+    [NormalizedEmail] nvarchar(256)  NULL,
+    [NormalizedUserName] nvarchar(256)  NULL,
+    [PasswordHash] nvarchar(max)  NULL,
+    [PhoneNumber] nvarchar(max)  NULL,
+    [PhoneNumberConfirmed] bit  NOT NULL,
+    [SecurityStamp] nvarchar(max)  NULL,
+    [TwoFactorEnabled] bit  NOT NULL,
+    [IdCiudad] smallint  NULL,
+    [IdPrograma] int  NULL,
+    [UserName] nvarchar(256)  NULL,
+    [IdentityId] nvarchar(max)  NULL,
+    [FirstName] nvarchar(50)  NULL,
+    [LastName] nvarchar(50)  NULL,
+    [Modified] datetime  NULL,
+    [Created] datetime  NULL
+);
+GO
+
+-- Creating table 'UserTokens'
+CREATE TABLE [dbo].[UserTokens] (
+    [UserId] nvarchar(450)  NOT NULL,
+    [LoginProvider] nvarchar(450)  NOT NULL,
+    [Name] nvarchar(450)  NOT NULL,
+    [Value] nvarchar(max)  NULL
+);
+GO
+
+-- Creating table 'Vendor'
+CREATE TABLE [dbo].[Vendor] (
+    [VendorId] int IDENTITY(1,1) NOT NULL,
+    [Address] nvarchar(max)  NULL,
+    [City] nvarchar(max)  NULL,
+    [ContactPerson] nvarchar(max)  NULL,
+    [Email] nvarchar(max)  NULL,
+    [Phone] nvarchar(max)  NULL,
+    [State] nvarchar(max)  NULL,
+    [VendorName] nvarchar(max)  NOT NULL,
+    [VendorTypeId] int  NOT NULL,
+    [ZipCode] nvarchar(max)  NULL
+);
+GO
+
+-- Creating table 'VendorType'
+CREATE TABLE [dbo].[VendorType] (
+    [VendorTypeId] int IDENTITY(1,1) NOT NULL,
+    [Description] nvarchar(max)  NULL,
+    [VendorTypeName] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'Warehouse'
+CREATE TABLE [dbo].[Warehouse] (
+    [WarehouseId] int IDENTITY(1,1) NOT NULL,
+    [BranchId] int  NOT NULL,
+    [Description] nvarchar(max)  NULL,
+    [WarehouseName] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'RefreshTokens'
+CREATE TABLE [dbo].[RefreshTokens] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Token] nvarchar(50)  NULL,
+    [Expires] datetime  NOT NULL,
+    [UserId] nvarchar(450)  NOT NULL,
+    [RemoteIpAddress] nvarchar(256)  NOT NULL,
+    [Modified] datetime  NOT NULL,
+    [Created] datetime  NOT NULL
+);
+GO
+
+-- Creating table 'UserRefreshToken'
+CREATE TABLE [dbo].[UserRefreshToken] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Username] nvarchar(50)  NOT NULL,
+    [Password] nvarchar(450)  NOT NULL,
+    [RefreshToken] nvarchar(max)  NULL
+);
+GO
+
+-- Creating table 'AspNetUserRoles'
+CREATE TABLE [dbo].[AspNetUserRoles] (
+    [AspNetRoles_Id] nvarchar(450)  NOT NULL,
+    [AspNetUsers_Id] nvarchar(450)  NOT NULL
+);
+GO
+
+-- Creating table 'EspecialidadMedica'
+CREATE TABLE [dbo].[EspecialidadMedica] (
+    [DatosMedico_IdMedico] bigint  NOT NULL,
+    [Especialidad_IdEspecialidad] smallint  NOT NULL
+);
+GO
+
+-- Creating table 'RoleOperations'
+CREATE TABLE [dbo].[RoleOperations] (
+    [Operation_OperationId] int  NOT NULL,
+    [Roles_Id] nvarchar(450)  NOT NULL
+);
+GO
+
+-- Creating table 'UserRoles'
+CREATE TABLE [dbo].[UserRoles] (
+    [Roles_Id] nvarchar(450)  NOT NULL,
+    [Users_Id] nvarchar(450)  NOT NULL
+);
+GO
+
+-- --------------------------------------------------
+-- Creating all PRIMARY KEY constraints
+-- --------------------------------------------------
+
+-- Creating primary key on [MigrationId] in table 'C__EFMigrationsHistory'
+ALTER TABLE [dbo].[C__EFMigrationsHistory]
+ADD CONSTRAINT [PK_C__EFMigrationsHistory]
+    PRIMARY KEY CLUSTERED ([MigrationId] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'AspNetRoleClaims'
+ALTER TABLE [dbo].[AspNetRoleClaims]
+ADD CONSTRAINT [PK_AspNetRoleClaims]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'AspNetRoles'
+ALTER TABLE [dbo].[AspNetRoles]
+ADD CONSTRAINT [PK_AspNetRoles]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'AspNetUserClaims'
+ALTER TABLE [dbo].[AspNetUserClaims]
+ADD CONSTRAINT [PK_AspNetUserClaims]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [LoginProvider], [ProviderKey] in table 'AspNetUserLogins'
+ALTER TABLE [dbo].[AspNetUserLogins]
+ADD CONSTRAINT [PK_AspNetUserLogins]
+    PRIMARY KEY CLUSTERED ([LoginProvider], [ProviderKey] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'AspNetUsers'
+ALTER TABLE [dbo].[AspNetUsers]
+ADD CONSTRAINT [PK_AspNetUsers]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [UserId], [LoginProvider], [Name] in table 'AspNetUserTokens'
+ALTER TABLE [dbo].[AspNetUserTokens]
+ADD CONSTRAINT [PK_AspNetUserTokens]
+    PRIMARY KEY CLUSTERED ([UserId], [LoginProvider], [Name] ASC);
+GO
+
+-- Creating primary key on [BillId] in table 'Bill'
+ALTER TABLE [dbo].[Bill]
+ADD CONSTRAINT [PK_Bill]
+    PRIMARY KEY CLUSTERED ([BillId] ASC);
+GO
+
+-- Creating primary key on [BillTypeId] in table 'BillType'
+ALTER TABLE [dbo].[BillType]
+ADD CONSTRAINT [PK_BillType]
+    PRIMARY KEY CLUSTERED ([BillTypeId] ASC);
+GO
+
+-- Creating primary key on [BranchId] in table 'Branch'
+ALTER TABLE [dbo].[Branch]
+ADD CONSTRAINT [PK_Branch]
+    PRIMARY KEY CLUSTERED ([BranchId] ASC);
+GO
+
+-- Creating primary key on [MigrationId] in table 'C__EFMigrationsHistory1'
+ALTER TABLE [dbo].[C__EFMigrationsHistory1]
+ADD CONSTRAINT [PK_C__EFMigrationsHistory1]
+    PRIMARY KEY CLUSTERED ([MigrationId] ASC);
+GO
+
+-- Creating primary key on [CashBankId] in table 'CashBank'
+ALTER TABLE [dbo].[CashBank]
+ADD CONSTRAINT [PK_CashBank]
+    PRIMARY KEY CLUSTERED ([CashBankId] ASC);
+GO
+
+-- Creating primary key on [IdChatBot] in table 'Chatbot'
+ALTER TABLE [dbo].[Chatbot]
+ADD CONSTRAINT [PK_Chatbot]
+    PRIMARY KEY CLUSTERED ([IdChatBot] ASC);
+GO
+
+-- Creating primary key on [IdCita] in table 'Cita'
+ALTER TABLE [dbo].[Cita]
+ADD CONSTRAINT [PK_Cita]
+    PRIMARY KEY CLUSTERED ([IdCita] ASC);
+GO
+
+-- Creating primary key on [IdClaseTarifaria] in table 'ClaseTarifaria'
+ALTER TABLE [dbo].[ClaseTarifaria]
+ADD CONSTRAINT [PK_ClaseTarifaria]
+    PRIMARY KEY CLUSTERED ([IdClaseTarifaria] ASC);
+GO
+
+-- Creating primary key on [ClientId] in table 'Client'
+ALTER TABLE [dbo].[Client]
+ADD CONSTRAINT [PK_Client]
+    PRIMARY KEY CLUSTERED ([ClientId] ASC);
+GO
+
+-- Creating primary key on [IdConsulta] in table 'Consulta'
+ALTER TABLE [dbo].[Consulta]
+ADD CONSTRAINT [PK_Consulta]
+    PRIMARY KEY CLUSTERED ([IdConsulta] ASC);
+GO
+
+-- Creating primary key on [Convenio1] in table 'Convenio'
+ALTER TABLE [dbo].[Convenio]
+ADD CONSTRAINT [PK_Convenio]
+    PRIMARY KEY CLUSTERED ([Convenio1] ASC);
+GO
+
+-- Creating primary key on [IdCredito] in table 'Credito'
+ALTER TABLE [dbo].[Credito]
+ADD CONSTRAINT [PK_Credito]
+    PRIMARY KEY CLUSTERED ([IdCredito] ASC);
+GO
+
+-- Creating primary key on [IdCiudad] in table 'Cuidad'
+ALTER TABLE [dbo].[Cuidad]
+ADD CONSTRAINT [PK_Cuidad]
+    PRIMARY KEY CLUSTERED ([IdCiudad] ASC);
+GO
+
+-- Creating primary key on [CurrencyId] in table 'Currency'
+ALTER TABLE [dbo].[Currency]
+ADD CONSTRAINT [PK_Currency]
+    PRIMARY KEY CLUSTERED ([CurrencyId] ASC);
+GO
+
+-- Creating primary key on [CustomerId] in table 'Customer'
+ALTER TABLE [dbo].[Customer]
+ADD CONSTRAINT [PK_Customer]
+    PRIMARY KEY CLUSTERED ([CustomerId] ASC);
+GO
+
+-- Creating primary key on [CustomerTypeId] in table 'CustomerType'
+ALTER TABLE [dbo].[CustomerType]
+ADD CONSTRAINT [PK_CustomerType]
+    PRIMARY KEY CLUSTERED ([CustomerTypeId] ASC);
+GO
+
+-- Creating primary key on [IdMedico] in table 'DatosMedico'
+ALTER TABLE [dbo].[DatosMedico]
+ADD CONSTRAINT [PK_DatosMedico]
+    PRIMARY KEY CLUSTERED ([IdMedico] ASC);
+GO
+
+-- Creating primary key on [IdPaciente] in table 'DatosPaciente'
+ALTER TABLE [dbo].[DatosPaciente]
+ADD CONSTRAINT [PK_DatosPaciente]
+    PRIMARY KEY CLUSTERED ([IdPaciente] ASC);
+GO
+
+-- Creating primary key on [IdDepartamento] in table 'Departamento'
+ALTER TABLE [dbo].[Departamento]
+ADD CONSTRAINT [PK_Departamento]
+    PRIMARY KEY CLUSTERED ([IdDepartamento] ASC);
+GO
+
+-- Creating primary key on [IdEspecialidad] in table 'Especialidad'
+ALTER TABLE [dbo].[Especialidad]
+ADD CONSTRAINT [PK_Especialidad]
+    PRIMARY KEY CLUSTERED ([IdEspecialidad] ASC);
+GO
+
+-- Creating primary key on [IdFormulario], [Detalle], [Codigo], [Activo] in table 'Formulario'
+ALTER TABLE [dbo].[Formulario]
+ADD CONSTRAINT [PK_Formulario]
+    PRIMARY KEY CLUSTERED ([IdFormulario], [Detalle], [Codigo], [Activo] ASC);
+GO
+
+-- Creating primary key on [GoodsReceivedNoteId] in table 'GoodsReceivedNote'
+ALTER TABLE [dbo].[GoodsReceivedNote]
+ADD CONSTRAINT [PK_GoodsReceivedNote]
+    PRIMARY KEY CLUSTERED ([GoodsReceivedNoteId] ASC);
+GO
+
+-- Creating primary key on [IdHistoriaClinica] in table 'HistoriaClinica'
+ALTER TABLE [dbo].[HistoriaClinica]
+ADD CONSTRAINT [PK_HistoriaClinica]
+    PRIMARY KEY CLUSTERED ([IdHistoriaClinica] ASC);
+GO
+
+-- Creating primary key on [IdHorario] in table 'Horario'
+ALTER TABLE [dbo].[Horario]
+ADD CONSTRAINT [PK_Horario]
+    PRIMARY KEY CLUSTERED ([IdHorario] ASC);
+GO
+
+-- Creating primary key on [IdHorasHorario] in table 'HorasHorario'
+ALTER TABLE [dbo].[HorasHorario]
+ADD CONSTRAINT [PK_HorasHorario]
+    PRIMARY KEY CLUSTERED ([IdHorasHorario] ASC);
+GO
+
+-- Creating primary key on [IdIdioma] in table 'Idioma'
+ALTER TABLE [dbo].[Idioma]
+ADD CONSTRAINT [PK_Idioma]
+    PRIMARY KEY CLUSTERED ([IdIdioma] ASC);
+GO
+
+-- Creating primary key on [InvoiceId] in table 'Invoice'
+ALTER TABLE [dbo].[Invoice]
+ADD CONSTRAINT [PK_Invoice]
+    PRIMARY KEY CLUSTERED ([InvoiceId] ASC);
+GO
+
+-- Creating primary key on [InvoiceTypeId] in table 'InvoiceType'
+ALTER TABLE [dbo].[InvoiceType]
+ADD CONSTRAINT [PK_InvoiceType]
+    PRIMARY KEY CLUSTERED ([InvoiceTypeId] ASC);
+GO
+
+-- Creating primary key on [IdMedioPago] in table 'MedioPago'
+ALTER TABLE [dbo].[MedioPago]
+ADD CONSTRAINT [PK_MedioPago]
+    PRIMARY KEY CLUSTERED ([IdMedioPago] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Menu'
+ALTER TABLE [dbo].[Menu]
+ADD CONSTRAINT [PK_Menu]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'MenuGrupo'
+ALTER TABLE [dbo].[MenuGrupo]
+ADD CONSTRAINT [PK_MenuGrupo]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [IdMoneda] in table 'Moneda'
+ALTER TABLE [dbo].[Moneda]
+ADD CONSTRAINT [PK_Moneda]
+    PRIMARY KEY CLUSTERED ([IdMoneda] ASC);
+GO
+
+-- Creating primary key on [NumberSequenceId] in table 'NumberSequence'
+ALTER TABLE [dbo].[NumberSequence]
+ADD CONSTRAINT [PK_NumberSequence]
+    PRIMARY KEY CLUSTERED ([NumberSequenceId] ASC);
+GO
+
+-- Creating primary key on [OperationId] in table 'Operation'
+ALTER TABLE [dbo].[Operation]
+ADD CONSTRAINT [PK_Operation]
+    PRIMARY KEY CLUSTERED ([OperationId] ASC);
+GO
+
+-- Creating primary key on [IdPago] in table 'Pago'
+ALTER TABLE [dbo].[Pago]
+ADD CONSTRAINT [PK_Pago]
+    PRIMARY KEY CLUSTERED ([IdPago] ASC);
+GO
+
+-- Creating primary key on [IdPais] in table 'Pais'
+ALTER TABLE [dbo].[Pais]
+ADD CONSTRAINT [PK_Pais]
+    PRIMARY KEY CLUSTERED ([IdPais] ASC);
+GO
+
+-- Creating primary key on [PaymentReceiveId] in table 'PaymentReceive'
+ALTER TABLE [dbo].[PaymentReceive]
+ADD CONSTRAINT [PK_PaymentReceive]
+    PRIMARY KEY CLUSTERED ([PaymentReceiveId] ASC);
+GO
+
+-- Creating primary key on [PaymentTypeId] in table 'PaymentType'
+ALTER TABLE [dbo].[PaymentType]
+ADD CONSTRAINT [PK_PaymentType]
+    PRIMARY KEY CLUSTERED ([PaymentTypeId] ASC);
+GO
+
+-- Creating primary key on [PaymentvoucherId] in table 'PaymentVoucher'
+ALTER TABLE [dbo].[PaymentVoucher]
+ADD CONSTRAINT [PK_PaymentVoucher]
+    PRIMARY KEY CLUSTERED ([PaymentvoucherId] ASC);
+GO
+
+-- Creating primary key on [IdPoliticaResponsibilidad] in table 'PoliticaResponsabilidad'
+ALTER TABLE [dbo].[PoliticaResponsabilidad]
+ADD CONSTRAINT [PK_PoliticaResponsabilidad]
+    PRIMARY KEY CLUSTERED ([IdPoliticaResponsibilidad] ASC);
+GO
+
+-- Creating primary key on [IdPQRS] in table 'PQRS'
+ALTER TABLE [dbo].[PQRS]
+ADD CONSTRAINT [PK_PQRS]
+    PRIMARY KEY CLUSTERED ([IdPQRS] ASC);
+GO
+
+-- Creating primary key on [IdProcedimiento] in table 'Procedimiento'
+ALTER TABLE [dbo].[Procedimiento]
+ADD CONSTRAINT [PK_Procedimiento]
+    PRIMARY KEY CLUSTERED ([IdProcedimiento] ASC);
+GO
+
+-- Creating primary key on [ProductId] in table 'Product'
+ALTER TABLE [dbo].[Product]
+ADD CONSTRAINT [PK_Product]
+    PRIMARY KEY CLUSTERED ([ProductId] ASC);
+GO
+
+-- Creating primary key on [ProductTypeId] in table 'ProductType'
+ALTER TABLE [dbo].[ProductType]
+ADD CONSTRAINT [PK_ProductType]
+    PRIMARY KEY CLUSTERED ([ProductTypeId] ASC);
+GO
+
+-- Creating primary key on [IdPrograma] in table 'Programa'
+ALTER TABLE [dbo].[Programa]
+ADD CONSTRAINT [PK_Programa]
+    PRIMARY KEY CLUSTERED ([IdPrograma] ASC);
+GO
+
+-- Creating primary key on [PurchaseOrderId] in table 'PurchaseOrder'
+ALTER TABLE [dbo].[PurchaseOrder]
+ADD CONSTRAINT [PK_PurchaseOrder]
+    PRIMARY KEY CLUSTERED ([PurchaseOrderId] ASC);
+GO
+
+-- Creating primary key on [PurchaseOrderLineId] in table 'PurchaseOrderLine'
+ALTER TABLE [dbo].[PurchaseOrderLine]
+ADD CONSTRAINT [PK_PurchaseOrderLine]
+    PRIMARY KEY CLUSTERED ([PurchaseOrderLineId] ASC);
+GO
+
+-- Creating primary key on [PurchaseTypeId] in table 'PurchaseType'
+ALTER TABLE [dbo].[PurchaseType]
+ADD CONSTRAINT [PK_PurchaseType]
+    PRIMARY KEY CLUSTERED ([PurchaseTypeId] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'RoleClaims'
+ALTER TABLE [dbo].[RoleClaims]
+ADD CONSTRAINT [PK_RoleClaims]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Roles'
+ALTER TABLE [dbo].[Roles]
+ADD CONSTRAINT [PK_Roles]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [SalesOrderId] in table 'SalesOrder'
+ALTER TABLE [dbo].[SalesOrder]
+ADD CONSTRAINT [PK_SalesOrder]
+    PRIMARY KEY CLUSTERED ([SalesOrderId] ASC);
+GO
+
+-- Creating primary key on [SalesOrderLineId] in table 'SalesOrderLine'
+ALTER TABLE [dbo].[SalesOrderLine]
+ADD CONSTRAINT [PK_SalesOrderLine]
+    PRIMARY KEY CLUSTERED ([SalesOrderLineId] ASC);
+GO
+
+-- Creating primary key on [SalesTypeId] in table 'SalesType'
+ALTER TABLE [dbo].[SalesType]
+ADD CONSTRAINT [PK_SalesType]
+    PRIMARY KEY CLUSTERED ([SalesTypeId] ASC);
+GO
+
+-- Creating primary key on [ShipmentId] in table 'Shipment'
+ALTER TABLE [dbo].[Shipment]
+ADD CONSTRAINT [PK_Shipment]
+    PRIMARY KEY CLUSTERED ([ShipmentId] ASC);
+GO
+
+-- Creating primary key on [ShipmentTypeId] in table 'ShipmentType'
+ALTER TABLE [dbo].[ShipmentType]
+ADD CONSTRAINT [PK_ShipmentType]
+    PRIMARY KEY CLUSTERED ([ShipmentTypeId] ASC);
+GO
+
+-- Creating primary key on [IdSoporte], [IdConsulta], [IdTipoSoporte], [Nombre], [Tamanio], [TipoArchivo] in table 'Soporte'
+ALTER TABLE [dbo].[Soporte]
+ADD CONSTRAINT [PK_Soporte]
+    PRIMARY KEY CLUSTERED ([IdSoporte], [IdConsulta], [IdTipoSoporte], [Nombre], [Tamanio], [TipoArchivo] ASC);
+GO
+
+-- Creating primary key on [diagram_id] in table 'sysdiagrams'
+ALTER TABLE [dbo].[sysdiagrams]
+ADD CONSTRAINT [PK_sysdiagrams]
+    PRIMARY KEY CLUSTERED ([diagram_id] ASC);
+GO
+
+-- Creating primary key on [IdTarifa] in table 'TarifaProcedimiento'
+ALTER TABLE [dbo].[TarifaProcedimiento]
+ADD CONSTRAINT [PK_TarifaProcedimiento]
+    PRIMARY KEY CLUSTERED ([IdTarifa] ASC);
+GO
+
+-- Creating primary key on [IdTarifaProcedimientos] in table 'TarifaProcedimientos'
+ALTER TABLE [dbo].[TarifaProcedimientos]
+ADD CONSTRAINT [PK_TarifaProcedimientos]
+    PRIMARY KEY CLUSTERED ([IdTarifaProcedimientos] ASC);
+GO
+
+-- Creating primary key on [IdTipoSoporte] in table 'TipoSoporte'
+ALTER TABLE [dbo].[TipoSoporte]
+ADD CONSTRAINT [PK_TipoSoporte]
+    PRIMARY KEY CLUSTERED ([IdTipoSoporte] ASC);
+GO
+
+-- Creating primary key on [IdTipSalud] in table 'TipSalud'
+ALTER TABLE [dbo].[TipSalud]
+ADD CONSTRAINT [PK_TipSalud]
+    PRIMARY KEY CLUSTERED ([IdTipSalud] ASC);
+GO
+
+-- Creating primary key on [UnitOfMeasureId] in table 'UnitOfMeasure'
+ALTER TABLE [dbo].[UnitOfMeasure]
+ADD CONSTRAINT [PK_UnitOfMeasure]
+    PRIMARY KEY CLUSTERED ([UnitOfMeasureId] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'UserClaims'
+ALTER TABLE [dbo].[UserClaims]
+ADD CONSTRAINT [PK_UserClaims]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [LoginProvider], [ProviderKey] in table 'UserLogins'
+ALTER TABLE [dbo].[UserLogins]
+ADD CONSTRAINT [PK_UserLogins]
+    PRIMARY KEY CLUSTERED ([LoginProvider], [ProviderKey] ASC);
+GO
+
+-- Creating primary key on [UserProfileId] in table 'UserProfile'
+ALTER TABLE [dbo].[UserProfile]
+ADD CONSTRAINT [PK_UserProfile]
+    PRIMARY KEY CLUSTERED ([UserProfileId] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'UserRefreshTokens'
+ALTER TABLE [dbo].[UserRefreshTokens]
+ADD CONSTRAINT [PK_UserRefreshTokens]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Users'
+ALTER TABLE [dbo].[Users]
+ADD CONSTRAINT [PK_Users]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [UserId], [LoginProvider], [Name] in table 'UserTokens'
+ALTER TABLE [dbo].[UserTokens]
+ADD CONSTRAINT [PK_UserTokens]
+    PRIMARY KEY CLUSTERED ([UserId], [LoginProvider], [Name] ASC);
+GO
+
+-- Creating primary key on [VendorId] in table 'Vendor'
+ALTER TABLE [dbo].[Vendor]
+ADD CONSTRAINT [PK_Vendor]
+    PRIMARY KEY CLUSTERED ([VendorId] ASC);
+GO
+
+-- Creating primary key on [VendorTypeId] in table 'VendorType'
+ALTER TABLE [dbo].[VendorType]
+ADD CONSTRAINT [PK_VendorType]
+    PRIMARY KEY CLUSTERED ([VendorTypeId] ASC);
+GO
+
+-- Creating primary key on [WarehouseId] in table 'Warehouse'
+ALTER TABLE [dbo].[Warehouse]
+ADD CONSTRAINT [PK_Warehouse]
+    PRIMARY KEY CLUSTERED ([WarehouseId] ASC);
+GO
+
+-- Creating primary key on [Id], [Expires], [UserId], [RemoteIpAddress], [Modified], [Created] in table 'RefreshTokens'
+ALTER TABLE [dbo].[RefreshTokens]
+ADD CONSTRAINT [PK_RefreshTokens]
+    PRIMARY KEY CLUSTERED ([Id], [Expires], [UserId], [RemoteIpAddress], [Modified], [Created] ASC);
+GO
+
+-- Creating primary key on [Id], [Username], [Password] in table 'UserRefreshToken'
+ALTER TABLE [dbo].[UserRefreshToken]
+ADD CONSTRAINT [PK_UserRefreshToken]
+    PRIMARY KEY CLUSTERED ([Id], [Username], [Password] ASC);
+GO
+
+-- Creating primary key on [AspNetRoles_Id], [AspNetUsers_Id] in table 'AspNetUserRoles'
+ALTER TABLE [dbo].[AspNetUserRoles]
+ADD CONSTRAINT [PK_AspNetUserRoles]
+    PRIMARY KEY CLUSTERED ([AspNetRoles_Id], [AspNetUsers_Id] ASC);
+GO
+
+-- Creating primary key on [DatosMedico_IdMedico], [Especialidad_IdEspecialidad] in table 'EspecialidadMedica'
+ALTER TABLE [dbo].[EspecialidadMedica]
+ADD CONSTRAINT [PK_EspecialidadMedica]
+    PRIMARY KEY CLUSTERED ([DatosMedico_IdMedico], [Especialidad_IdEspecialidad] ASC);
+GO
+
+-- Creating primary key on [Operation_OperationId], [Roles_Id] in table 'RoleOperations'
+ALTER TABLE [dbo].[RoleOperations]
+ADD CONSTRAINT [PK_RoleOperations]
+    PRIMARY KEY CLUSTERED ([Operation_OperationId], [Roles_Id] ASC);
+GO
+
+-- Creating primary key on [Roles_Id], [Users_Id] in table 'UserRoles'
+ALTER TABLE [dbo].[UserRoles]
+ADD CONSTRAINT [PK_UserRoles]
+    PRIMARY KEY CLUSTERED ([Roles_Id], [Users_Id] ASC);
+GO
+
+-- --------------------------------------------------
+-- Creating all FOREIGN KEY constraints
+-- --------------------------------------------------
+
+-- Creating foreign key on [RoleId] in table 'AspNetRoleClaims'
+ALTER TABLE [dbo].[AspNetRoleClaims]
+ADD CONSTRAINT [FK_AspNetRoleClaims_AspNetRoles_RoleId]
+    FOREIGN KEY ([RoleId])
+    REFERENCES [dbo].[AspNetRoles]
+        ([Id])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AspNetRoleClaims_AspNetRoles_RoleId'
+CREATE INDEX [IX_FK_AspNetRoleClaims_AspNetRoles_RoleId]
+ON [dbo].[AspNetRoleClaims]
+    ([RoleId]);
+GO
+
+-- Creating foreign key on [UserId] in table 'AspNetUserClaims'
+ALTER TABLE [dbo].[AspNetUserClaims]
+ADD CONSTRAINT [FK_AspNetUserClaims_AspNetUsers_UserId]
+    FOREIGN KEY ([UserId])
+    REFERENCES [dbo].[AspNetUsers]
+        ([Id])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AspNetUserClaims_AspNetUsers_UserId'
+CREATE INDEX [IX_FK_AspNetUserClaims_AspNetUsers_UserId]
+ON [dbo].[AspNetUserClaims]
+    ([UserId]);
+GO
+
+-- Creating foreign key on [UserId] in table 'AspNetUserLogins'
+ALTER TABLE [dbo].[AspNetUserLogins]
+ADD CONSTRAINT [FK_AspNetUserLogins_AspNetUsers_UserId]
+    FOREIGN KEY ([UserId])
+    REFERENCES [dbo].[AspNetUsers]
+        ([Id])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AspNetUserLogins_AspNetUsers_UserId'
+CREATE INDEX [IX_FK_AspNetUserLogins_AspNetUsers_UserId]
+ON [dbo].[AspNetUserLogins]
+    ([UserId]);
+GO
+
+-- Creating foreign key on [UserId] in table 'AspNetUserTokens'
+ALTER TABLE [dbo].[AspNetUserTokens]
+ADD CONSTRAINT [FK_AspNetUserTokens_AspNetUsers_UserId]
+    FOREIGN KEY ([UserId])
+    REFERENCES [dbo].[AspNetUsers]
+        ([Id])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [IdMedico] in table 'Cita'
+ALTER TABLE [dbo].[Cita]
+ADD CONSTRAINT [FK_Cita_DatosMedico]
+    FOREIGN KEY ([IdMedico])
+    REFERENCES [dbo].[DatosMedico]
+        ([IdMedico])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Cita_DatosMedico'
+CREATE INDEX [IX_FK_Cita_DatosMedico]
+ON [dbo].[Cita]
+    ([IdMedico]);
+GO
+
+-- Creating foreign key on [IdPaciente] in table 'Cita'
+ALTER TABLE [dbo].[Cita]
+ADD CONSTRAINT [FK_Cita_DatosPaciente]
+    FOREIGN KEY ([IdPaciente])
+    REFERENCES [dbo].[DatosPaciente]
+        ([IdPaciente])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Cita_DatosPaciente'
+CREATE INDEX [IX_FK_Cita_DatosPaciente]
+ON [dbo].[Cita]
+    ([IdPaciente]);
+GO
+
+-- Creating foreign key on [IdCita] in table 'Consulta'
+ALTER TABLE [dbo].[Consulta]
+ADD CONSTRAINT [FK_Consulta_Cita]
+    FOREIGN KEY ([IdCita])
+    REFERENCES [dbo].[Cita]
+        ([IdCita])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Consulta_Cita'
+CREATE INDEX [IX_FK_Consulta_Cita]
+ON [dbo].[Consulta]
+    ([IdCita]);
+GO
+
+-- Creating foreign key on [IdPrograma] in table 'ClaseTarifaria'
+ALTER TABLE [dbo].[ClaseTarifaria]
+ADD CONSTRAINT [FK_ClaseTarifaria_Programa]
+    FOREIGN KEY ([IdPrograma])
+    REFERENCES [dbo].[Programa]
+        ([IdPrograma])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ClaseTarifaria_Programa'
+CREATE INDEX [IX_FK_ClaseTarifaria_Programa]
+ON [dbo].[ClaseTarifaria]
+    ([IdPrograma]);
+GO
+
+-- Creating foreign key on [IdClaseTarifa] in table 'TarifaProcedimientos'
+ALTER TABLE [dbo].[TarifaProcedimientos]
+ADD CONSTRAINT [FK_TarifaProcedimientos_ClaseTarifaria]
+    FOREIGN KEY ([IdClaseTarifa])
+    REFERENCES [dbo].[ClaseTarifaria]
+        ([IdClaseTarifaria])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_TarifaProcedimientos_ClaseTarifaria'
+CREATE INDEX [IX_FK_TarifaProcedimientos_ClaseTarifaria]
+ON [dbo].[TarifaProcedimientos]
+    ([IdClaseTarifa]);
+GO
+
+-- Creating foreign key on [ClientId] in table 'Roles'
+ALTER TABLE [dbo].[Roles]
+ADD CONSTRAINT [FK_Roles_Client]
+    FOREIGN KEY ([ClientId])
+    REFERENCES [dbo].[Client]
+        ([ClientId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Roles_Client'
+CREATE INDEX [IX_FK_Roles_Client]
+ON [dbo].[Roles]
+    ([ClientId]);
+GO
+
+-- Creating foreign key on [IdMedico] in table 'Consulta'
+ALTER TABLE [dbo].[Consulta]
+ADD CONSTRAINT [FK_Consulta_DatosMedico]
+    FOREIGN KEY ([IdMedico])
+    REFERENCES [dbo].[DatosMedico]
+        ([IdMedico])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Consulta_DatosMedico'
+CREATE INDEX [IX_FK_Consulta_DatosMedico]
+ON [dbo].[Consulta]
+    ([IdMedico]);
+GO
+
+-- Creating foreign key on [IdPaciente] in table 'Consulta'
+ALTER TABLE [dbo].[Consulta]
+ADD CONSTRAINT [FK_Consulta_DatosPaciente]
+    FOREIGN KEY ([IdPaciente])
+    REFERENCES [dbo].[DatosPaciente]
+        ([IdPaciente])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Consulta_DatosPaciente'
+CREATE INDEX [IX_FK_Consulta_DatosPaciente]
+ON [dbo].[Consulta]
+    ([IdPaciente]);
+GO
+
+-- Creating foreign key on [IdConsulta] in table 'HistoriaClinica'
+ALTER TABLE [dbo].[HistoriaClinica]
+ADD CONSTRAINT [FK_HistoriaClinica_Consulta]
+    FOREIGN KEY ([IdConsulta])
+    REFERENCES [dbo].[Consulta]
+        ([IdConsulta])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_HistoriaClinica_Consulta'
+CREATE INDEX [IX_FK_HistoriaClinica_Consulta]
+ON [dbo].[HistoriaClinica]
+    ([IdConsulta]);
+GO
+
+-- Creating foreign key on [IdConsulta] in table 'Soporte'
+ALTER TABLE [dbo].[Soporte]
+ADD CONSTRAINT [FK_Soporteo_Consulta]
+    FOREIGN KEY ([IdConsulta])
+    REFERENCES [dbo].[Consulta]
+        ([IdConsulta])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Soporteo_Consulta'
+CREATE INDEX [IX_FK_Soporteo_Consulta]
+ON [dbo].[Soporte]
+    ([IdConsulta]);
+GO
+
+-- Creating foreign key on [IdPrograma] in table 'Convenio'
+ALTER TABLE [dbo].[Convenio]
+ADD CONSTRAINT [FK_ConvenioPrograma]
+    FOREIGN KEY ([IdPrograma])
+    REFERENCES [dbo].[Programa]
+        ([IdPrograma])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ConvenioPrograma'
+CREATE INDEX [IX_FK_ConvenioPrograma]
+ON [dbo].[Convenio]
+    ([IdPrograma]);
+GO
+
+-- Creating foreign key on [IdUsuario] in table 'Credito'
+ALTER TABLE [dbo].[Credito]
+ADD CONSTRAINT [FK_CreditoUsers]
+    FOREIGN KEY ([IdUsuario])
+    REFERENCES [dbo].[Users]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CreditoUsers'
+CREATE INDEX [IX_FK_CreditoUsers]
+ON [dbo].[Credito]
+    ([IdUsuario]);
+GO
+
+-- Creating foreign key on [IdCredito] in table 'Pago'
+ALTER TABLE [dbo].[Pago]
+ADD CONSTRAINT [FK_Pago_Credito]
+    FOREIGN KEY ([IdCredito])
+    REFERENCES [dbo].[Credito]
+        ([IdCredito])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Pago_Credito'
+CREATE INDEX [IX_FK_Pago_Credito]
+ON [dbo].[Pago]
+    ([IdCredito]);
+GO
+
+-- Creating foreign key on [IdDepartamento] in table 'Cuidad'
+ALTER TABLE [dbo].[Cuidad]
+ADD CONSTRAINT [FK_Cuidad_Departamento]
+    FOREIGN KEY ([IdDepartamento])
+    REFERENCES [dbo].[Departamento]
+        ([IdDepartamento])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Cuidad_Departamento'
+CREATE INDEX [IX_FK_Cuidad_Departamento]
+ON [dbo].[Cuidad]
+    ([IdDepartamento]);
+GO
+
+-- Creating foreign key on [IdCiudad] in table 'Users'
+ALTER TABLE [dbo].[Users]
+ADD CONSTRAINT [FK_Users_Cuidad]
+    FOREIGN KEY ([IdCiudad])
+    REFERENCES [dbo].[Cuidad]
+        ([IdCiudad])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Users_Cuidad'
+CREATE INDEX [IX_FK_Users_Cuidad]
+ON [dbo].[Users]
+    ([IdCiudad]);
+GO
+
+-- Creating foreign key on [IdUsuario] in table 'DatosMedico'
+ALTER TABLE [dbo].[DatosMedico]
+ADD CONSTRAINT [FK_DatosMedico_Users]
+    FOREIGN KEY ([IdUsuario])
+    REFERENCES [dbo].[Users]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_DatosMedico_Users'
+CREATE INDEX [IX_FK_DatosMedico_Users]
+ON [dbo].[DatosMedico]
+    ([IdUsuario]);
+GO
+
+-- Creating foreign key on [IdUsuario] in table 'DatosPaciente'
+ALTER TABLE [dbo].[DatosPaciente]
+ADD CONSTRAINT [FK_DatosPaciente_Users]
+    FOREIGN KEY ([IdUsuario])
+    REFERENCES [dbo].[Users]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_DatosPaciente_Users'
+CREATE INDEX [IX_FK_DatosPaciente_Users]
+ON [dbo].[DatosPaciente]
+    ([IdUsuario]);
+GO
+
+-- Creating foreign key on [IdPais] in table 'Departamento'
+ALTER TABLE [dbo].[Departamento]
+ADD CONSTRAINT [FK_Departamento_Pais]
+    FOREIGN KEY ([IdPais])
+    REFERENCES [dbo].[Pais]
+        ([IdPais])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Departamento_Pais'
+CREATE INDEX [IX_FK_Departamento_Pais]
+ON [dbo].[Departamento]
+    ([IdPais]);
+GO
+
+-- Creating foreign key on [IdHorario] in table 'HorasHorario'
+ALTER TABLE [dbo].[HorasHorario]
+ADD CONSTRAINT [FK_Horario_HorasHorario]
+    FOREIGN KEY ([IdHorario])
+    REFERENCES [dbo].[Horario]
+        ([IdHorario])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Horario_HorasHorario'
+CREATE INDEX [IX_FK_Horario_HorasHorario]
+ON [dbo].[HorasHorario]
+    ([IdHorario]);
+GO
+
+-- Creating foreign key on [IdUsuario] in table 'Horario'
+ALTER TABLE [dbo].[Horario]
+ADD CONSTRAINT [FK_Horario_Users]
+    FOREIGN KEY ([IdUsuario])
+    REFERENCES [dbo].[Users]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Horario_Users'
+CREATE INDEX [IX_FK_Horario_Users]
+ON [dbo].[Horario]
+    ([IdUsuario]);
+GO
+
+-- Creating foreign key on [IdMedioPago] in table 'Pago'
+ALTER TABLE [dbo].[Pago]
+ADD CONSTRAINT [FK_Pago_MedioPago]
+    FOREIGN KEY ([IdMedioPago])
+    REFERENCES [dbo].[MedioPago]
+        ([IdMedioPago])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Pago_MedioPago'
+CREATE INDEX [IX_FK_Pago_MedioPago]
+ON [dbo].[Pago]
+    ([IdMedioPago]);
+GO
+
+-- Creating foreign key on [idMenu] in table 'MenuGrupo'
+ALTER TABLE [dbo].[MenuGrupo]
+ADD CONSTRAINT [FK_menugrupo_menu]
+    FOREIGN KEY ([idMenu])
+    REFERENCES [dbo].[Menu]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_menugrupo_menu'
+CREATE INDEX [IX_FK_menugrupo_menu]
+ON [dbo].[MenuGrupo]
+    ([idMenu]);
+GO
+
+-- Creating foreign key on [ParentNode] in table 'Operation'
+ALTER TABLE [dbo].[Operation]
+ADD CONSTRAINT [FK_Operation_Operation_ParentNode]
+    FOREIGN KEY ([ParentNode])
+    REFERENCES [dbo].[Operation]
+        ([OperationId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Operation_Operation_ParentNode'
+CREATE INDEX [IX_FK_Operation_Operation_ParentNode]
+ON [dbo].[Operation]
+    ([ParentNode]);
+GO
+
+-- Creating foreign key on [IdUsuario] in table 'PQRS'
+ALTER TABLE [dbo].[PQRS]
+ADD CONSTRAINT [FK_PQRS_Users]
+    FOREIGN KEY ([IdUsuario])
+    REFERENCES [dbo].[Users]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PQRS_Users'
+CREATE INDEX [IX_FK_PQRS_Users]
+ON [dbo].[PQRS]
+    ([IdUsuario]);
+GO
+
+-- Creating foreign key on [IdPrograma] in table 'Users'
+ALTER TABLE [dbo].[Users]
+ADD CONSTRAINT [FK_Users_Programa]
+    FOREIGN KEY ([IdPrograma])
+    REFERENCES [dbo].[Programa]
+        ([IdPrograma])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Users_Programa'
+CREATE INDEX [IX_FK_Users_Programa]
+ON [dbo].[Users]
+    ([IdPrograma]);
+GO
+
+-- Creating foreign key on [PurchaseOrderId] in table 'PurchaseOrderLine'
+ALTER TABLE [dbo].[PurchaseOrderLine]
+ADD CONSTRAINT [FK_PurchaseOrderLine_PurchaseOrder_PurchaseOrderId]
+    FOREIGN KEY ([PurchaseOrderId])
+    REFERENCES [dbo].[PurchaseOrder]
+        ([PurchaseOrderId])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PurchaseOrderLine_PurchaseOrder_PurchaseOrderId'
+CREATE INDEX [IX_FK_PurchaseOrderLine_PurchaseOrder_PurchaseOrderId]
+ON [dbo].[PurchaseOrderLine]
+    ([PurchaseOrderId]);
+GO
+
+-- Creating foreign key on [RoleId] in table 'RoleClaims'
+ALTER TABLE [dbo].[RoleClaims]
+ADD CONSTRAINT [FK_RoleClaims_Roles_RoleId]
+    FOREIGN KEY ([RoleId])
+    REFERENCES [dbo].[Roles]
+        ([Id])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_RoleClaims_Roles_RoleId'
+CREATE INDEX [IX_FK_RoleClaims_Roles_RoleId]
+ON [dbo].[RoleClaims]
+    ([RoleId]);
+GO
+
+-- Creating foreign key on [SalesOrderId] in table 'SalesOrderLine'
+ALTER TABLE [dbo].[SalesOrderLine]
+ADD CONSTRAINT [FK_SalesOrderLine_SalesOrder_SalesOrderId]
+    FOREIGN KEY ([SalesOrderId])
+    REFERENCES [dbo].[SalesOrder]
+        ([SalesOrderId])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_SalesOrderLine_SalesOrder_SalesOrderId'
+CREATE INDEX [IX_FK_SalesOrderLine_SalesOrder_SalesOrderId]
+ON [dbo].[SalesOrderLine]
+    ([SalesOrderId]);
+GO
+
+-- Creating foreign key on [IdTipoSoporte] in table 'Soporte'
+ALTER TABLE [dbo].[Soporte]
+ADD CONSTRAINT [FK_Soporteo_TipoSoporte]
+    FOREIGN KEY ([IdTipoSoporte])
+    REFERENCES [dbo].[TipoSoporte]
+        ([IdTipoSoporte])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Soporteo_TipoSoporte'
+CREATE INDEX [IX_FK_Soporteo_TipoSoporte]
+ON [dbo].[Soporte]
+    ([IdTipoSoporte]);
+GO
+
+-- Creating foreign key on [UserId] in table 'UserClaims'
+ALTER TABLE [dbo].[UserClaims]
+ADD CONSTRAINT [FK_UserClaims_Users_UserId]
+    FOREIGN KEY ([UserId])
+    REFERENCES [dbo].[Users]
+        ([Id])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserClaims_Users_UserId'
+CREATE INDEX [IX_FK_UserClaims_Users_UserId]
+ON [dbo].[UserClaims]
+    ([UserId]);
+GO
+
+-- Creating foreign key on [UserId] in table 'UserLogins'
+ALTER TABLE [dbo].[UserLogins]
+ADD CONSTRAINT [FK_UserLogins_Users_UserId]
+    FOREIGN KEY ([UserId])
+    REFERENCES [dbo].[Users]
+        ([Id])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserLogins_Users_UserId'
+CREATE INDEX [IX_FK_UserLogins_Users_UserId]
+ON [dbo].[UserLogins]
+    ([UserId]);
+GO
+
+-- Creating foreign key on [UserId] in table 'UserRefreshTokens'
+ALTER TABLE [dbo].[UserRefreshTokens]
+ADD CONSTRAINT [FK_UserRefreshTokens_Users_UserId]
+    FOREIGN KEY ([UserId])
+    REFERENCES [dbo].[Users]
+        ([Id])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserRefreshTokens_Users_UserId'
+CREATE INDEX [IX_FK_UserRefreshTokens_Users_UserId]
+ON [dbo].[UserRefreshTokens]
+    ([UserId]);
+GO
+
+-- Creating foreign key on [UserId] in table 'RefreshTokens'
+ALTER TABLE [dbo].[RefreshTokens]
+ADD CONSTRAINT [FK_RefreshTokens_Users_UserId]
+    FOREIGN KEY ([UserId])
+    REFERENCES [dbo].[Users]
+        ([Id])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_RefreshTokens_Users_UserId'
+CREATE INDEX [IX_FK_RefreshTokens_Users_UserId]
+ON [dbo].[RefreshTokens]
+    ([UserId]);
+GO
+
+-- Creating foreign key on [UserId] in table 'UserTokens'
+ALTER TABLE [dbo].[UserTokens]
+ADD CONSTRAINT [FK_UserTokens_Users_UserId]
+    FOREIGN KEY ([UserId])
+    REFERENCES [dbo].[Users]
+        ([Id])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [AspNetRoles_Id] in table 'AspNetUserRoles'
+ALTER TABLE [dbo].[AspNetUserRoles]
+ADD CONSTRAINT [FK_AspNetUserRoles_AspNetRoles]
+    FOREIGN KEY ([AspNetRoles_Id])
+    REFERENCES [dbo].[AspNetRoles]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [AspNetUsers_Id] in table 'AspNetUserRoles'
+ALTER TABLE [dbo].[AspNetUserRoles]
+ADD CONSTRAINT [FK_AspNetUserRoles_AspNetUsers]
+    FOREIGN KEY ([AspNetUsers_Id])
+    REFERENCES [dbo].[AspNetUsers]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AspNetUserRoles_AspNetUsers'
+CREATE INDEX [IX_FK_AspNetUserRoles_AspNetUsers]
+ON [dbo].[AspNetUserRoles]
+    ([AspNetUsers_Id]);
+GO
+
+-- Creating foreign key on [DatosMedico_IdMedico] in table 'EspecialidadMedica'
+ALTER TABLE [dbo].[EspecialidadMedica]
+ADD CONSTRAINT [FK_EspecialidadMedica_DatosMedico]
+    FOREIGN KEY ([DatosMedico_IdMedico])
+    REFERENCES [dbo].[DatosMedico]
+        ([IdMedico])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Especialidad_IdEspecialidad] in table 'EspecialidadMedica'
+ALTER TABLE [dbo].[EspecialidadMedica]
+ADD CONSTRAINT [FK_EspecialidadMedica_Especialidad]
+    FOREIGN KEY ([Especialidad_IdEspecialidad])
+    REFERENCES [dbo].[Especialidad]
+        ([IdEspecialidad])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_EspecialidadMedica_Especialidad'
+CREATE INDEX [IX_FK_EspecialidadMedica_Especialidad]
+ON [dbo].[EspecialidadMedica]
+    ([Especialidad_IdEspecialidad]);
+GO
+
+-- Creating foreign key on [Operation_OperationId] in table 'RoleOperations'
+ALTER TABLE [dbo].[RoleOperations]
+ADD CONSTRAINT [FK_RoleOperations_Operation]
+    FOREIGN KEY ([Operation_OperationId])
+    REFERENCES [dbo].[Operation]
+        ([OperationId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Roles_Id] in table 'RoleOperations'
+ALTER TABLE [dbo].[RoleOperations]
+ADD CONSTRAINT [FK_RoleOperations_Roles]
+    FOREIGN KEY ([Roles_Id])
+    REFERENCES [dbo].[Roles]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_RoleOperations_Roles'
+CREATE INDEX [IX_FK_RoleOperations_Roles]
+ON [dbo].[RoleOperations]
+    ([Roles_Id]);
+GO
+
+-- Creating foreign key on [Roles_Id] in table 'UserRoles'
+ALTER TABLE [dbo].[UserRoles]
+ADD CONSTRAINT [FK_UserRoles_Roles]
+    FOREIGN KEY ([Roles_Id])
+    REFERENCES [dbo].[Roles]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Users_Id] in table 'UserRoles'
+ALTER TABLE [dbo].[UserRoles]
+ADD CONSTRAINT [FK_UserRoles_Users]
+    FOREIGN KEY ([Users_Id])
+    REFERENCES [dbo].[Users]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserRoles_Users'
+CREATE INDEX [IX_FK_UserRoles_Users]
+ON [dbo].[UserRoles]
+    ([Users_Id]);
+GO
+
+-- --------------------------------------------------
+-- Script has ended
+-- --------------------------------------------------
