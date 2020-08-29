@@ -1,5 +1,5 @@
 # Asp.Net-User-Role-Membership-Example
-Asp.Net Core Mvc Full Implementation Example of User Role &amp; Membership.
+Asp.Net Core Mvc Ejemplo de implementación completa de rol de usuario y membresía
 
 ![userrolemembership1](coderush/wwwroot/images/scm3.png)
 ![userrolemembership1](coderush/wwwroot/images/scm2.png)
