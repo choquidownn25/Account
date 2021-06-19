@@ -31,7 +31,7 @@ namespace coderush.Data
 
        
 
-        public DbSet<coderush.Models.Warehouse> Warehouse { get; set; }
+      
 
         public DbSet<coderush.Models.UserProfile> UserProfile { get; set; }
     }

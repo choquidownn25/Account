@@ -51,10 +51,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\packages\Microsoft.AspNetCore.Mvc.TagHelpers.Localization\Microsoft.AspNetCore.Mvc.TagHelpers.Localization.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="System.Web.Mvc">
       <HintPath>..\..\..\..\..\..\C#\New folder\Architecture.UI - copia\bin\System.Web.Mvc.dll</HintPath>
     </Reference>

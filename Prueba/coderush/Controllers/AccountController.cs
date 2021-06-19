@@ -83,13 +83,6 @@ namespace coderush.Controllers
             if (ModelState.IsValid)
             {
 
-                if (model.Email == "admon")
-                {
-                    model.Email = "super@admin.com";
-                    model.Password = "123456";
-
-
-                }
                     // Esto no cuenta las fallas de inicio de sesión para el bloqueo de la cuenta
                     // Para habilitar las fallas de contraseña para activar el bloqueo de la cuenta, configure lockoutOnFailure: true
                     var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
