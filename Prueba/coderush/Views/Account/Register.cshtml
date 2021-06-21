@@ -18,8 +18,10 @@
                 <label asp-for="TipoRegistro"></label>
                 <span class="form-control-feedback"></span>
                 <select class="form-control" data-rel="chosen" id="TipoRegistro" name="TipoRegistro">
-                    <option>Usuario</option>
-                    <option>Admin</option>
+                    <option>Visitante</option>
+                    <option>Asistente</option>
+                    <option>Editor</option>
+                    <option>Administrador</option>
                 </select>
                 <span asp-validation-for="TipoRegistro" class="text-danger"></span>
             </div>
@@ -38,7 +40,26 @@
                 <span asp-validation-for="Apellido" class="text-danger"></span>
             </div>
 
-       
+            <div class="form-group has-feedback">
+                <label asp-for="Telefono"></label>
+                <input asp-for="Telefono" type="text" class="form-control" placeholder="Telefono" />
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label asp-for="Direccion"></label>
+                <input asp-for="Direccion" type="text" class="form-control" placeholder="Direccion" />
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <span asp-validation-for="Direccion" class="text-danger"></span>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label asp-for="Edad"></label>
+                <input asp-for="Edad" type="number" class="form-control" placeholder="Edad" />
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <span asp-validation-for="Edad" class="text-danger"></span>
+            </div>
 
             <div class="form-group has-feedback">
                 <label asp-for="Email"></label>

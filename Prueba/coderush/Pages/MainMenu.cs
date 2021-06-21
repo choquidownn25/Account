@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace coderush.Pages
 {
+    /// <summary>
+    /// Menu para acceder a la app
+    /// </summary>
     public static class MainMenu
     {
 
@@ -74,14 +77,7 @@ namespace coderush.Pages
             public const string ControllerName = "UserRole";
             public const string ActionName = "Index";
         }
-        public static class Usuario
-        {
-            public const string PageName = "Usuario";
-            public const string RoleName = "Usuario";
-           // public const string Path = "/Usuario/Index";
-            public const string ControllerName = "Usuario";
-            //public const string ActionName = "Index";
-        }
+        
 
        
     }

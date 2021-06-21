@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace coderush.Controllers
 {
-    [Authorize(Roles = Pages.MainMenu.Usuario.RoleName)]
+    
     public class UsuarioController : Controller
     {
         public IActionResult Index()

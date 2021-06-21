@@ -644,7 +644,10 @@ namespace coderush.Migrations
                     b.Property<string>("ApplicationUserId");
 
                     b.Property<string>("ConfirmPassword");
-
+                    b.Property<string>("TipoRegistro");
+                    b.Property<string>("Direccion");
+                    b.Property<string>("Telefono");
+                    b.Property<string>("Edad");
                     b.Property<string>("Email");
 
                     b.Property<string>("FirstName");

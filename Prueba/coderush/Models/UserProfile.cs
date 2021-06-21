@@ -11,6 +11,11 @@ namespace coderush.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+        public string TipoRegistro { get; set; }
+        public string Direccion { get; set; }
+        public string Telefono { get; set; }
+
+        public string Edad { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
         public string OldPassword { get; set; }

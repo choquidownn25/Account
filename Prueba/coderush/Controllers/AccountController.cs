@@ -82,7 +82,10 @@ namespace coderush.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-
+                if(model.Email == "admon")
+                {
+                    model.Email = "admon@admon.com";
+                }
                     // Esto no cuenta las fallas de inicio de sesión para el bloqueo de la cuenta
                     // Para habilitar las fallas de contraseña para activar el bloqueo de la cuenta, configure lockoutOnFailure: true
                     var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
@@ -262,9 +265,17 @@ namespace coderush.Controllers
 
                     #region para la base de datos local para los permisos del menu
                     userProfile.ApplicationUserId = user.Id;
+                    userProfile.TipoRegistro = model.TipoRegistro;
                     userProfile.FirstName = model.Nombre;
                     userProfile.LastName = model.Apellido;
                     userProfile.Email = model.Email;
+
+
+                    userProfile.Direccion = model.Direccion;
+                    userProfile.Telefono = model.Telefono;
+                    userProfile.Edad = model.Edad;
+
+
                     userProfile.Password = model.Password;
                     userProfile.ConfirmPassword = model.Password;
                     userRole.ApplicationUserId = user.Id;
